@@ -1,124 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vinyl Unwrapped - Year by Year Stats</title>
+    <title>Vinyl Unwrapped</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
     <style>
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: #0f172a;
-            color: #e2e8f0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            color: #ffffff;
         }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .header {
+        .hero {
+            padding: 8rem 0;
             text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-            border-bottom: 1px solid #334155;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
         }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        .hero h1 {
+            font-size: 5.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #D51007, #ffeb3b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            animation: fadeInUp 1s ease-out;
+            letter-spacing: -2px;
         }
-        .year-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .hero p {
+            font-size: 1.5rem;
+            color: #94a3b8;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+            line-height: 1.6;
         }
         .year-card {
-            background: #1e293b;
-            border-radius: 1rem;
-            padding: 2rem;
-            text-align: center;
-            transition: transform 0.2s ease-in-out;
-            border: 1px solid #334155;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out backwards;
         }
         .year-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         .year-link {
-            color: #e2e8f0;
             text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
+            color: inherit;
         }
-        .year-link:hover {
-            color: #38bdf8;
+        .year-card h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #D51007, #ffeb3b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+            letter-spacing: -1px;
         }
-        .description {
-            max-width: 800px;
-            margin: 2rem auto;
-            text-align: center;
+        .year-card p {
             color: #94a3b8;
+            margin: 0;
+            font-size: 1.2rem;
+            line-height: 1.5;
         }
-        footer {
+        .footer {
             text-align: center;
+            padding: 3rem 0;
+            color: #64748b;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 6rem;
+        }
+        .footer a {
+            color: #D51007;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .footer a:hover {
+            color: #ffeb3b;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
             padding: 2rem;
-            margin-top: 4rem;
-            border-top: 1px solid #334155;
-            color: #94a3b8;
+            max-width: 1400px;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div class="hero">
         <div class="container">
-            <h1>Vinyl Unwrapped</h1>
-            <div class="description">
-                A year-by-year journey through my vinyl collection, powered by Discogs data and visualized with modern web technologies.
-            </div>
+            <h1>Unwrapped</h1>
+            <p>A year-by-year journey through my vinyl collection and listening habbits, powered by Discogs and LastFM data.</p>
         </div>
     </div>
-    <main class="container">
-        <div class="year-grid">
+
+    <div class="container">
+        <div class="grid-container">
             
-            <div class="year-card">
-                <a href="/2024/" class="year-link">2024 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2023/" class="year-link">2023 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2022/" class="year-link">2022 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2021/" class="year-link">2021 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2020/" class="year-link">2020 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2019/" class="year-link">2019 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2018/" class="year-link">2018 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2017/" class="year-link">2017 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2016/" class="year-link">2016 Unwrapped</a>
-            </div>
-            <div class="year-card">
-                <a href="/2015/" class="year-link">2015 Unwrapped</a>
-            </div>
+            <a href="2024/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.0s">
+                    <h2>2024 Unwrapped</h2>
+                    <p>Explore my vinyl journey through 2024</p>
+                </div>
+            </a>
+            
+            <a href="2023/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.1s">
+                    <h2>2023 Unwrapped</h2>
+                    <p>Revisit the records of 2023</p>
+                </div>
+            </a>
+            
+            <a href="2022/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.2s">
+                    <h2>2022 Unwrapped</h2>
+                    <p>Look back at 2022's collection</p>
+                </div>
+            </a>
+            
+            <a href="2021/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.30000000000000004s">
+                    <h2>2021 Unwrapped</h2>
+                    <p>Discover the vinyl from 2021</p>
+                </div>
+            </a>
+            
+            <a href="2020/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.4s">
+                    <h2>2020 Unwrapped</h2>
+                    <p>Remember the music of 2020</p>
+                </div>
+            </a>
+            
+            <a href="2019/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.5s">
+                    <h2>2019 Unwrapped</h2>
+                    <p>Relive 2019's additions</p>
+                </div>
+            </a>
+            
+            <a href="2018/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.6000000000000001s">
+                    <h2>2018 Unwrapped</h2>
+                    <p>Explore the sounds of 2018</p>
+                </div>
+            </a>
+            
+            <a href="2017/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.7000000000000001s">
+                    <h2>2017 Unwrapped</h2>
+                    <p>Journey back to 2017</p>
+                </div>
+            </a>
+            
+            <a href="2016/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.8s">
+                    <h2>2016 Unwrapped</h2>
+                    <p>Revisit 2016's collection</p>
+                </div>
+            </a>
+            
+            <a href="2015/" class="year-link">
+                <div class="year-card" style="animation-delay: 0.9s">
+                    <h2>2015 Unwrapped</h2>
+                    <p>Where it all began</p>
+                </div>
+            </a>
+            
         </div>
-    </main>
-    <footer>
-        <p>Built with ❤️ using Discogs data</p>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>Built with <i class="bi bi-heart-fill text-danger"></i> using <a href="https://www.discogs.com/" target="_blank">Discogs</a> data</p>
+        </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
