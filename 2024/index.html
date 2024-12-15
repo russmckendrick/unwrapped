@@ -6,11 +6,6 @@
     <title>Vinyl Unwrapped 2024</title>
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Pass the data to JavaScript
-        const monthlyData = [6, 16, 32, 22, 14, 11, 13, 15, 23, 15, 28, 9];
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    </script>
 </head>
 <body>
     <div class="container">
@@ -19,33 +14,27 @@
         </header>
 
         <div class="stats-overview">
-            <div class="total-records">
-                <h2>204</h2>
-                <p>Records Added</p>
+            <div class="stat-cards">
+                <div class="total-records">
+                    <h2>204</h2>
+                    <p>Records Added</p>
+                </div>
+                
+                <div class="total-scrobbles">
+                    <h2>8,301</h2>
+                    <p>Total Scrobbles</p>
+                </div>
+                
             </div>
-            
-            <div class="total-scrobbles">
-                <h2>8301</h2>
-                <p>Total Scrobbles</p>
-            </div>
-            
             <div class="chart-container">
                 <canvas id="monthlyChart"></canvas>
-                <script>
-                    // Store chart data in a global object to avoid conflicts
-                    window.chartData = {
-                        months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-                        monthlyData: [6, 16, 32, 22, 14, 11, 13, 15, 23, 15, 28, 9],
-                        monthIds: {"April": "month-april", "August": "month-august", "December": "month-december", "February": "month-february", "January": "month-january", "July": "month-july", "June": "month-june", "March": "month-march", "May": "month-may", "November": "month-november", "October": "month-october", "September": "month-september"}
-                    };
-                </script>
             </div>
         </div>
 
-        
         <div class="stats-grid">
+            
             <div class="stat-card">
-                <h3>Top Artists (Last.fm)</h3>
+                <h3>Most Listened Artists</h3>
                 <ul class="stat-list">
                     
                     <li>
@@ -102,7 +91,7 @@
             </div>
 
             <div class="stat-card">
-                <h3>Top Albums (Last.fm)</h3>
+                <h3>Most Played Albums</h3>
                 <ul class="stat-list">
                     
                     <li>
@@ -157,7 +146,7 @@
                     
                 </ul>
             </div>
-        
+            
 
             <div class="stat-card">
                 <h3>Top Genres</h3>
@@ -648,7 +637,7 @@
         </div>
 
         <div class="collection-by-month">
-            <h2>My 2024 Additions</h2>
+            <h2>My 2024 Collection</h2>
             
                 
                 <div id="month-january" class="month-section">
@@ -8129,12 +8118,21 @@
         </div>
 
         <footer>
-            <p>Generated on 2024-12-15 15:37:47</p>
+            <p>Generated on 2024-12-15 15:45:31</p>
             
             <p>Last.fm data fetched on 2024-12-15T15:17:13.484948</p>
             
         </footer>
     </div>
+
+    <script>
+        // Store chart data in a global object to avoid conflicts
+        window.chartData = {
+            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            monthlyData: [6, 16, 32, 22, 14, 11, 13, 15, 23, 15, 28, 9],
+            monthIds: {"April": "month-april", "August": "month-august", "December": "month-december", "February": "month-february", "January": "month-january", "July": "month-july", "June": "month-june", "March": "month-march", "May": "month-may", "November": "month-november", "October": "month-october", "September": "month-september"}
+        };
+    </script>
     <script src="/js/charts.js"></script>
 </body>
 </html>
