@@ -8176,7 +8176,7 @@
             const maxValue = Math.max(...monthlyData);
             const colors = monthlyData.map(value => {
                 const intensity = value / maxValue;
-                return `hsl(${Math.floor(intensity * 60)}, 100%, 50%)`; // This creates a red-to-yellow gradient
+                return `hsl(${Math.floor(60 - intensity * 60)}, 100%, ${50 + intensity * 20}%)`; // This creates a yellow-to-red gradient
             });
             
             new Chart(ctx, {
