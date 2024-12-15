@@ -186,56 +186,56 @@
                     <div class="col-md-6">
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Genesis</div>
+                            <div class="play-count">170 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Peter Gabriel</div>
+                            <div class="play-count">152 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">U2</div>
+                            <div class="play-count">148 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Pink Floyd</div>
+                            <div class="play-count">143 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Tears for Fears</div>
+                            <div class="play-count">133 plays</div>
                         </div>
                         
                     </div>
                     <div class="col-md-6">
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">The Smashing Pumpkins</div>
+                            <div class="play-count">126 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Crowded House</div>
+                            <div class="play-count">114 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Pixies</div>
+                            <div class="play-count">114 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">David Bowie</div>
+                            <div class="play-count">110 plays</div>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name"></div>
-                            <div class="play-count"> plays</div>
+                            <div class="artist-name">Pure Reason Revolution</div>
+                            <div class="play-count">105 plays</div>
                         </div>
                         
                     </div>
@@ -8172,11 +8172,12 @@
             const ctx = document.getElementById('monthlyChart').getContext('2d');
             const { months, monthlyData, monthIds } = window.chartData;
             
-            // Create gradient colors based on data values
-            const maxValue = Math.max(...monthlyData);
-            const colors = monthlyData.map(value => {
-                const intensity = value / maxValue;
-                return `hsl(${Math.floor(60 - intensity * 60)}, 100%, ${50 + intensity * 20}%)`; // This creates a yellow-to-red gradient
+            // Create vertical gradient for each bar
+            const gradients = monthlyData.map(() => {
+                const gradient = ctx.createLinearGradient(0, 0, 0, 300);
+                gradient.addColorStop(0, '#D51007');  // Last.fm red at top
+                gradient.addColorStop(1, '#ffeb3b');  // Yellow at bottom
+                return gradient;
             });
             
             new Chart(ctx, {
@@ -8186,8 +8187,8 @@
                     datasets: [{
                         label: 'Records Added',
                         data: monthlyData,
-                        backgroundColor: colors,
-                        borderColor: colors,
+                        backgroundColor: gradients,
+                        borderColor: gradients,
                         borderWidth: 1
                     }]
                 },
