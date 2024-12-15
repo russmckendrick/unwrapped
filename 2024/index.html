@@ -15,21 +15,24 @@
 <body>
     <div class="container">
         <header>
-            <h1>Vinyl Unwrapped 2024</h1>
+            <h1>Unwrapped 2024</h1>
         </header>
 
         <div class="stats-overview">
-            <div class="total-records">
-                <h2>204</h2>
-                <p>Records Added</p>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Records Added</h3>
+                    <div class="stat-value">204</div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Total Scrobbles</h3>
+                    <div class="stat-value">8301</div>
+                </div>
+                
             </div>
-            
-            <div class="total-scrobbles">
-                <h2>8301</h2>
-                <p>Total Scrobbles</p>
-            </div>
-            
-            <div class="chart-container">
+            <div class="monthly-chart">
+                <h3>Albums Added per Month</h3>
                 <canvas id="monthlyChart"></canvas>
                 <script>
                     // Store chart data in a global object to avoid conflicts
@@ -41,67 +44,6 @@
                 </script>
             </div>
         </div>
-
-        
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>Most Played Artists</h3>
-                <ul class="stat-list">
-                    
-                    <li>
-                        <span class="stat-label">Genesis</span>
-                        <span class="stat-value">170 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Peter Gabriel</span>
-                        <span class="stat-value">152 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">U2</span>
-                        <span class="stat-value">148 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Pink Floyd</span>
-                        <span class="stat-value">143 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Tears for Fears</span>
-                        <span class="stat-value">133 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">The Smashing Pumpkins</span>
-                        <span class="stat-value">126 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Crowded House</span>
-                        <span class="stat-value">114 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Pixies</span>
-                        <span class="stat-value">114 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">David Bowie</span>
-                        <span class="stat-value">110 plays</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Pure Reason Revolution</span>
-                        <span class="stat-value">105 plays</span>
-                    </li>
-                    
-                </ul>
-            </div>
-        </div>
-        
 
         <div class="stats-grid">
             <div class="stat-card">
@@ -131,38 +73,6 @@
                     <li>
                         <span class="stat-label">BMG</span>
                         <span class="stat-value">10</span>
-                    </li>
-                    
-                </ul>
-            </div>
-
-            <div class="stat-card">
-                <h3>Top Formats</h3>
-                <ul class="stat-list">
-                    
-                    <li>
-                        <span class="stat-label">Vinyl (LP, Album, Limited Edition)</span>
-                        <span class="stat-value">22</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Vinyl (LP)</span>
-                        <span class="stat-value">19</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Vinyl (LP, Album)</span>
-                        <span class="stat-value">13</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Vinyl (LP, Album, Reissue)</span>
-                        <span class="stat-value">13</span>
-                    </li>
-                    
-                    <li>
-                        <span class="stat-label">Vinyl (LP, Album, Reissue, Remastered)</span>
-                        <span class="stat-value">13</span>
                     </li>
                     
                 </ul>
@@ -233,8 +143,67 @@
             </div>
         </div>
 
+        
+        <div class="lastfm-stats">
+            <h2>Most Played Artists on Last.fm</h2>
+            <div class="lastfm-grid">
+                
+                <div class="lastfm-card">
+                    <h4>Genesis</h4>
+                    <p class="scrobble-count">170 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>Peter Gabriel</h4>
+                    <p class="scrobble-count">152 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>U2</h4>
+                    <p class="scrobble-count">148 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>Pink Floyd</h4>
+                    <p class="scrobble-count">143 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>Tears for Fears</h4>
+                    <p class="scrobble-count">133 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>The Smashing Pumpkins</h4>
+                    <p class="scrobble-count">126 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>Crowded House</h4>
+                    <p class="scrobble-count">114 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>Pixies</h4>
+                    <p class="scrobble-count">114 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>David Bowie</h4>
+                    <p class="scrobble-count">110 plays</p>
+                </div>
+                
+                <div class="lastfm-card">
+                    <h4>Pure Reason Revolution</h4>
+                    <p class="scrobble-count">105 plays</p>
+                </div>
+                
+            </div>
+        </div>
+        
+
         <div class="top-artists">
-            <h2>2024's Most Collected Artists</h2>
+            <h2>Most Collected Artists</h2>
             <div class="records-grid">
                 
                 <div class="artist-card">
