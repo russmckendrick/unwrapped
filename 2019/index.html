@@ -39,31 +39,33 @@
             color: #D51007;
         }
         .lastfm-pill {
-            background: #282828;
-            border-radius: 50px;
-            padding: 0;
-            overflow: hidden;
             display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            align-items: stretch;
+            border-radius: 2rem;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
             transition: transform 0.2s;
         }
         .lastfm-pill:hover {
             transform: scale(1.02);
         }
-        .lastfm-pill .artist-name {
-            padding: 10px 20px;
-            flex-grow: 1;
-            text-align: left;
-            color: white;
-        }
-        .lastfm-pill .play-count {
-            background: #D51007;
-            padding: 10px 20px;
-            color: white;
+        .lastfm-artist {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.25rem;
             font-weight: bold;
-            min-width: 100px;
-            text-align: center;
+            flex: 1;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        .lastfm-plays {
+            background: #D51007;
+            padding: 0.75rem 1.25rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -3994,6 +3996,13 @@
                     }]
                 },
                 options: {
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const month = months[index].toLowerCase();
+                            window.location.href = `#${month}-records`;
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {

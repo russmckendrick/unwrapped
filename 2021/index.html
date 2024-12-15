@@ -39,31 +39,33 @@
             color: #D51007;
         }
         .lastfm-pill {
-            background: #282828;
-            border-radius: 50px;
-            padding: 0;
-            overflow: hidden;
             display: flex;
-            align-items: center;
-            margin-bottom: 10px;
+            align-items: stretch;
+            border-radius: 2rem;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
             transition: transform 0.2s;
         }
         .lastfm-pill:hover {
             transform: scale(1.02);
         }
-        .lastfm-pill .artist-name {
-            padding: 10px 20px;
-            flex-grow: 1;
-            text-align: left;
-            color: white;
-        }
-        .lastfm-pill .play-count {
-            background: #D51007;
-            padding: 10px 20px;
-            color: white;
+        .lastfm-artist {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.75rem 1.25rem;
             font-weight: bold;
-            min-width: 100px;
-            text-align: center;
+            flex: 1;
+            text-align: left;
+            display: flex;
+            align-items: center;
+        }
+        .lastfm-plays {
+            background: #D51007;
+            padding: 0.75rem 1.25rem;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
         }
     </style>
 </head>
@@ -186,56 +188,56 @@
                     <div class="col-md-6">
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">Crowded House</div>
-                            <div class="play-count">241 plays</div>
+                            <span class="lastfm-artist">Crowded House</span>
+                            <span class="lastfm-plays">241 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">Pink Floyd</div>
-                            <div class="play-count">196 plays</div>
+                            <span class="lastfm-artist">Pink Floyd</span>
+                            <span class="lastfm-plays">196 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">New Order</div>
-                            <div class="play-count">158 plays</div>
+                            <span class="lastfm-artist">New Order</span>
+                            <span class="lastfm-plays">158 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">Depeche Mode</div>
-                            <div class="play-count">145 plays</div>
+                            <span class="lastfm-artist">Depeche Mode</span>
+                            <span class="lastfm-plays">145 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">Genesis</div>
-                            <div class="play-count">129 plays</div>
+                            <span class="lastfm-artist">Genesis</span>
+                            <span class="lastfm-plays">129 plays</span>
                         </div>
                         
                     </div>
                     <div class="col-md-6">
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">Steven Wilson</div>
-                            <div class="play-count">113 plays</div>
+                            <span class="lastfm-artist">Steven Wilson</span>
+                            <span class="lastfm-plays">113 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">David Bowie</div>
-                            <div class="play-count">100 plays</div>
+                            <span class="lastfm-artist">David Bowie</span>
+                            <span class="lastfm-plays">100 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">Simple Minds</div>
-                            <div class="play-count">97 plays</div>
+                            <span class="lastfm-artist">Simple Minds</span>
+                            <span class="lastfm-plays">97 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">INXS</div>
-                            <div class="play-count">94 plays</div>
+                            <span class="lastfm-artist">INXS</span>
+                            <span class="lastfm-plays">94 plays</span>
                         </div>
                         
                         <div class="lastfm-pill">
-                            <div class="artist-name">The Smiths</div>
-                            <div class="play-count">83 plays</div>
+                            <span class="lastfm-artist">The Smiths</span>
+                            <span class="lastfm-plays">83 plays</span>
                         </div>
                         
                     </div>
@@ -9523,6 +9525,13 @@
                     }]
                 },
                 options: {
+                    onClick: (e, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const month = months[index].toLowerCase();
+                            window.location.href = `#${month}-records`;
+                        }
+                    },
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
