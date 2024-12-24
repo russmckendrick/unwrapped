@@ -7,7 +7,7 @@ import { RouterView } from 'vue-router'
 import { ref, computed, onMounted } from 'vue'
 import AlbumSlider from './components/AlbumSlider.vue'
 import MonthlyChart from './components/MonthlyChart.vue'
-import GenreCloud from './components/GenreCloud.vue'
+import StyleCloud from './components/StyleCloud.vue'
 import TopArtists from './components/TopArtists.vue'
 import dayjs from 'dayjs'
 

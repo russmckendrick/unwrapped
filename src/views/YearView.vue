@@ -90,8 +90,8 @@
               <div class="text-sm text-vinyl-light">Records Added</div>
             </div>
             <div>
-              <div class="text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.topGenre }}</div>
-              <div class="text-sm text-vinyl-light">Most Common Genre</div>
+              <div class="text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.topStyle }}</div>
+              <div class="text-sm text-vinyl-light">Most Common Style</div>
             </div>
             <div>
               <div class="text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.avgPerMonth }}</div>
@@ -101,15 +101,18 @@
         </section>
 
         <!-- Charts Section -->
-        <section class="grid md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <h3 class="text-xl font-semibold mb-4">Genre Distribution</h3>
-            <GenreCloud :data="genreData" />
+        <section class="space-y-12 mb-12">
+          <div class="w-full">
+            <h3 class="text-xl font-semibold mb-4">Style Distribution</h3>
+            <div class="h-[600px]">
+              <StyleCloud :data="styleData" />
+            </div>
           </div>
-          <div>
+          <div class="w-full">
             <h3 class="text-xl font-semibold mb-4">Records Added by Month</h3>
-            <p class="text-sm text-vinyl-light mb-4">Click on a month to view its additions</p>
-            <MonthlyChart :data="monthlyChartData" @month-click="scrollToMonth" />
+            <div class="h-[300px]">
+              <MonthlyChart :data="monthlyChartData" @month-click="scrollToMonth" />
+            </div>
           </div>
         </section>
 
@@ -165,7 +168,7 @@ import { ref, onMounted, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import AlbumSlider from '../components/AlbumSlider.vue'
 import MonthlyChart from '../components/MonthlyChart.vue'
-import GenreCloud from '../components/GenreCloud.vue'
+import StyleCloud from '../components/StyleCloud.vue'
 import TopArtists from '../components/TopArtists.vue'
 import dayjs from 'dayjs'
 
@@ -225,17 +228,17 @@ watch(() => route.params.year, async (newYear) => {
 const collectionStats = computed(() => {
   if (!collection.value.length) return { 
     totalRecords: 0, 
-    topGenre: '-',
+    topStyle: '-',
     avgPerMonth: 0
   }
   
-  const genres = collection.value.flatMap(record => record.genres)
-  const genreCounts = genres.reduce((acc, genre) => {
-    acc[genre] = (acc[genre] || 0) + 1
+  const styles = collection.value.flatMap(record => record.styles)
+  const styleCounts = styles.reduce((acc, style) => {
+    acc[style] = (acc[style] || 0) + 1
     return acc
   }, {})
   
-  const topGenre = Object.entries(genreCounts)
+  const topStyle = Object.entries(styleCounts)
     .sort((a, b) => b[1] - a[1])[0][0]
   
   // Calculate average records per month
@@ -245,22 +248,44 @@ const collectionStats = computed(() => {
   
   return {
     totalRecords: collection.value.length,
-    topGenre,
+    topStyle,
     avgPerMonth: Math.round(collection.value.length / months)
   }
 })
 
-const genreData = computed(() => {
-  if (!collection.value.length) return []
+const styleData = computed(() => {
+  if (!collection.value?.length) return []
   
-  const genres = collection.value.flatMap(record => record.genres)
-  const genreCounts = genres.reduce((acc, genre) => {
-    acc[genre] = (acc[genre] || 0) + 1
-    return acc
-  }, {})
+  const styleMap = new Map()
   
-  return Object.entries(genreCounts)
-    .map(([text, value]) => ({ text, value }))
+  // First pass to count styles and collect albums
+  collection.value.forEach(album => {
+    album.styles.forEach(style => {
+      if (!styleMap.has(style)) {
+        styleMap.set(style, {
+          text: style,
+          value: 1,
+          albums: [{
+            id: album.id,
+            title: album.title,
+            cover: album.cover_image,
+            slug: album.slug
+          }]
+        })
+      } else {
+        const existing = styleMap.get(style)
+        existing.value++
+        existing.albums.push({
+          id: album.id,
+          title: album.title,
+          cover: album.cover_image,
+          slug: album.slug
+        })
+      }
+    })
+  })
+  
+  return Array.from(styleMap.values())
     .sort((a, b) => b.value - a.value)
 })
 

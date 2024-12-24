@@ -162,4 +162,15 @@ watch(() => props.data, () => {
 :deep(path) {
   stroke: rgba(255, 255, 255, 0.2);
 }
+
+.section-header {
+  background: linear-gradient(120deg, #1DB954, #00BFA5);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 2px 8px rgba(29, 185, 84, 0.25);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
 </style>
