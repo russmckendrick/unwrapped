@@ -2,69 +2,86 @@
   <div class="min-h-screen bg-gradient-to-b from-vinyl-black to-vinyl-dark text-white">
     <!-- Year Navigation -->
     <nav class="fixed top-0 left-0 right-0 z-50 bg-vinyl-black/80 backdrop-blur-sm border-b border-white/10">
-      <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-        <div class="flex justify-center items-center space-x-4 mb-8">
+      <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="flex items-center justify-between">
+          <!-- Left side - Home link -->
           <router-link 
-            v-if="currentYear === '2015'"
-            :to="{ name: 'year', params: { year: '2016' }}"
-            class="px-3 py-1 text-sm rounded-full bg-black/20 hover:bg-black/30 
-                   text-vinyl-light hover:text-spotify-green transition-all duration-300
-                   border border-spotify-green/10 hover:border-blue-400/20">
-            ← 2016
-          </router-link>
-          <router-link 
-            v-else-if="currentYear === '2024'"
             to="/"
-            class="px-3 py-1 text-sm rounded-full bg-black/20 hover:bg-black/30 
-                   text-vinyl-light hover:text-spotify-green transition-all duration-300
-                   border border-spotify-green/10 hover:border-blue-400/20">
-            ← Home
+            class="text-vinyl-light hover:text-spotify-green transition-all duration-300 text-lg font-medium">
+            Vinyl Unwrapped
           </router-link>
-          <router-link 
-            v-else
-            :to="{ name: 'year', params: { year: String(Number(currentYear) + 1) }}"
-            class="px-3 py-1 text-sm rounded-full bg-black/20 hover:bg-black/30 
-                   text-vinyl-light hover:text-spotify-green transition-all duration-300
-                   border border-spotify-green/10 hover:border-blue-400/20">
-            ← {{ Number(currentYear) + 1 }}
-          </router-link>
+
+          <!-- Center - Desktop Years -->
+          <div class="hidden md:flex space-x-2">
+            <RouterLink 
+              v-for="year in availableYears"
+              :key="year"
+              :to="'/' + year"
+              class="px-3 py-1.5 rounded-full transition-all duration-300 text-center text-sm font-medium"
+              :class="[
+                year === currentYear 
+                  ? 'bg-spotify-green text-white' 
+                  : 'text-vinyl-light hover:text-white hover:bg-vinyl-light/10'
+              ]">
+              {{ year }}
+            </RouterLink>
+          </div>
+
+          <!-- Right side - Mobile Menu Button -->
+          <button 
+            @click="isMenuOpen = !isMenuOpen"
+            class="md:hidden p-2 text-vinyl-light hover:text-spotify-green focus:outline-none"
+            aria-label="Toggle menu">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              class="h-6 w-6" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor">
+              <path 
+                v-if="!isMenuOpen"
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                stroke-width="2" 
+                d="M4 6h16M4 12h16M4 18h16" />
+              <path 
+                v-else
+                stroke-linecap="round" 
+                stroke-linejoin="round" 
+                stroke-width="2" 
+                d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
         </div>
-        <div class="flex space-x-4 items-center">
-          <RouterLink 
-            v-for="year in availableYears"
-            :key="year"
-            :to="'/' + year"
-            class="px-2 py-1 rounded transition-colors"
-            :class="year === currentYear ? 'bg-spotify-green text-white' : 'text-vinyl-light hover:text-white'">
-            {{ year }}
-          </RouterLink>
-        </div>
-        <div class="flex justify-center items-center space-x-4 mb-8">
-          <router-link 
-            v-if="currentYear === '2015'"
-            to="/"
-            class="px-3 py-1 text-sm rounded-full bg-black/20 hover:bg-black/30 
-                   text-vinyl-light hover:text-spotify-green transition-all duration-300
-                   border border-spotify-green/10 hover:border-blue-400/20">
-            Home →
-          </router-link>
-          <router-link 
-            v-else-if="currentYear === '2024'"
-            :to="{ name: 'year', params: { year: '2023' }}"
-            class="px-3 py-1 text-sm rounded-full bg-black/20 hover:bg-black/30 
-                   text-vinyl-light hover:text-spotify-green transition-all duration-300
-                   border border-spotify-green/10 hover:border-blue-400/20">
-            2023 →
-          </router-link>
-          <router-link 
-            v-else
-            :to="{ name: 'year', params: { year: String(Number(currentYear) - 1) }}"
-            class="px-3 py-1 text-sm rounded-full bg-black/20 hover:bg-black/30 
-                   text-vinyl-light hover:text-spotify-green transition-all duration-300
-                   border border-spotify-green/10 hover:border-blue-400/20">
-            {{ Number(currentYear) - 1 }} →
-          </router-link>
-        </div>
+
+        <!-- Mobile Menu -->
+        <transition
+          enter-active-class="transition duration-200 ease-out"
+          enter-from-class="transform -translate-y-2 opacity-0"
+          enter-to-class="transform translate-y-0 opacity-100"
+          leave-active-class="transition duration-150 ease-in"
+          leave-from-class="transform translate-y-0 opacity-100"
+          leave-to-class="transform -translate-y-2 opacity-0">
+          <div 
+            v-show="isMenuOpen"
+            class="md:hidden mt-4">
+            <div class="grid grid-cols-3 gap-2">
+              <RouterLink 
+                v-for="year in availableYears"
+                :key="year"
+                :to="'/' + year"
+                class="px-2 py-2 rounded-lg transition-all duration-300 text-center text-sm font-medium"
+                :class="[
+                  year === currentYear 
+                    ? 'bg-spotify-green text-white' 
+                    : 'text-vinyl-light hover:text-white hover:bg-vinyl-light/10'
+                ]"
+                @click="isMenuOpen = false">
+                {{ year }}
+              </RouterLink>
+            </div>
+          </div>
+        </transition>
       </div>
     </nav>
 
@@ -84,17 +101,22 @@
             {{ currentYear }} in Numbers
           </h2>
           
-          <div class="grid grid-cols-3 gap-8 text-center">
-            <div>
-              <div class="text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.totalRecords }}</div>
-              <div class="text-sm text-vinyl-light">Records Added</div>
-            </div>
-            <div>
-              <div class="text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.topStyle }}</div>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-8 text-center">
+            <!-- Most Common Style - Full width on mobile -->
+            <div class="col-span-2 md:col-span-1 md:order-2 mb-4 md:mb-0">
+              <div class="text-4xl md:text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.topStyle }}</div>
               <div class="text-sm text-vinyl-light">Most Common Style</div>
             </div>
-            <div>
-              <div class="text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.avgPerMonth }}</div>
+            
+            <!-- Records Added -->
+            <div class="md:order-1">
+              <div class="text-4xl md:text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.totalRecords }}</div>
+              <div class="text-sm text-vinyl-light">Records Added</div>
+            </div>
+            
+            <!-- Average Records per Month -->
+            <div class="md:order-3">
+              <div class="text-4xl md:text-5xl font-bold text-spotify-green mb-2">{{ collectionStats.avgPerMonth }}</div>
               <div class="text-sm text-vinyl-light">Avg Records/Month</div>
             </div>
           </div>
@@ -180,40 +202,60 @@ const props = defineProps({
   }
 })
 
+const yearData = ref(null)
 const collection = ref([])
 const currentYear = computed(() => props.year)
+const isMenuOpen = ref(false)
 
-// Get available years from the route params
-const availableYears = ref(['2024', '2023', '2022', '2021', '2020',
-  '2019', '2018', '2017', '2016', '2015'].sort((a, b) => b - a))
+// Available years will be dynamically loaded from collection files
+const availableYears = ref([])
 
-const previousYear = computed(() => {
-  const idx = availableYears.value.indexOf(currentYear.value)
-  return idx < availableYears.value.length - 1 ? availableYears.value[idx + 1] : null
-})
-
-const nextYear = computed(() => {
-  const idx = availableYears.value.indexOf(currentYear.value)
-  return idx > 0 ? availableYears.value[idx - 1] : null
+// Load the available years on component mount
+onMounted(async () => {
+  try {
+    // First load the current year's data
+    await loadYearData(props.year)
+    
+    // Then try to load the list of all available years
+    const files = await fetch('/collection_2024.json')
+      .then(response => {
+        if (!response.ok) throw new Error('Failed to fetch collection')
+        return response.json()
+      })
+      .catch(error => {
+        console.error('Error fetching collection:', error)
+        return []
+      })
+    
+    // Get unique years from the collection files in public directory
+    const years = ['2024', '2023', '2022', '2021', '2020', '2019', '2018', '2017', '2016', '2015']
+    availableYears.value = years.sort((a, b) => b - a)
+  } catch (error) {
+    console.error('Error in onMounted:', error)
+    // Fallback to just the current year if there's an error
+    availableYears.value = [props.year]
+  }
 })
 
 // Function to load data for a specific year
-const loadYearData = async (year) => {
+async function loadYearData(year) {
   try {
     // Reset data first
     collection.value = []
+    yearData.value = null
     
     const response = await fetch(`/collection_${year}.json`)
-    
     if (!response.ok) {
-      throw new Error('Failed to fetch collection data')
+      throw new Error(`Failed to fetch collection for year ${year}`)
     }
     
-    // Update collection data
-    collection.value = await response.json()
+    const data = await response.json()
+    collection.value = data
+    yearData.value = data
   } catch (error) {
-    console.error('Error loading data:', error)
+    console.error('Error loading year data:', error)
     collection.value = []
+    yearData.value = null
   }
 }
 
@@ -224,32 +266,37 @@ watch(() => route.params.year, async (newYear) => {
   }
 }, { immediate: true })
 
-// Computed properties
+// Computed properties for statistics
 const collectionStats = computed(() => {
-  if (!collection.value.length) return { 
-    totalRecords: 0, 
-    topStyle: '-',
-    avgPerMonth: 0
+  if (!collection.value || collection.value.length === 0) {
+    return { 
+      totalRecords: 0, 
+      topStyle: '-',
+      avgPerMonth: 0
+    }
   }
   
-  const styles = collection.value.flatMap(record => record.styles)
+  const styles = collection.value.flatMap(record => record.styles || [])
   const styleCounts = styles.reduce((acc, style) => {
     acc[style] = (acc[style] || 0) + 1
     return acc
   }, {})
   
   const topStyle = Object.entries(styleCounts)
-    .sort((a, b) => b[1] - a[1])[0][0]
+    .sort((a, b) => b[1] - a[1])[0]?.[0] || '-'
   
-  // Calculate average records per month
-  const months = new Set(collection.value.map(record => 
-    dayjs(record.date_added).format('YYYY-MM')
-  )).size || 1 // Avoid division by zero
+  const monthsWithRecords = new Set(
+    collection.value
+      .filter(record => record.date_added)
+      .map(record => dayjs(record.date_added).format('YYYY-MM'))
+  )
+  
+  const avgPerMonth = Math.round(collection.value.length / (monthsWithRecords.size || 1))
   
   return {
     totalRecords: collection.value.length,
     topStyle,
-    avgPerMonth: Math.round(collection.value.length / months)
+    avgPerMonth
   }
 })
 
@@ -337,6 +384,16 @@ const monthlyCollections = computed(() => {
 
   // Only return months that have albums
   return allMonths.filter(month => month.albums.length > 0)
+})
+
+const previousYear = computed(() => {
+  const idx = availableYears.value.indexOf(currentYear.value)
+  return idx < availableYears.value.length - 1 ? availableYears.value[idx + 1] : null
+})
+
+const nextYear = computed(() => {
+  const idx = availableYears.value.indexOf(currentYear.value)
+  return idx > 0 ? availableYears.value[idx - 1] : null
 })
 
 function scrollToMonth(monthName) {
