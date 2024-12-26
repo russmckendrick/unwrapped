@@ -120,99 +120,94 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', onWindowResize)
   if (renderer) {
     renderer.dispose()
+    const container = document.getElementById('bg-canvas')
+    if (container && container.firstChild) {
+      container.removeChild(container.firstChild)
+    }
   }
 })
 
 function initThree() {
+  const container = document.getElementById('bg-canvas')
+  if (!container) return
+
   scene = new THREE.Scene()
   camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-  renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  document.getElementById('bg-canvas').appendChild(renderer.domElement)
-
-  // Create multiple waves across the screen
-  const colors = [
-    0x00ff88, // Spotify green
-    0x1db954, // Another shade of green
-    0x4a90e2, // Blue
-  ]
-
-  // Increase number of rows and waves per row for fuller coverage
-  const rows = 8
-  const wavesPerRow = 4
-  const waveSpacing = window.innerHeight / (rows - 1)
   
-  for (let row = 0; row < rows; row++) {
-    for (let i = 0; i < wavesPerRow; i++) {
-      const points = []
-      // Increase segments for smoother waves
-      const waveSegments = 300
-      // Make waves wider than the screen
-      const width = window.innerWidth * 1.5
+  renderer = new THREE.WebGLRenderer({ 
+    antialias: true,
+    alpha: true 
+  })
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  renderer.setClearColor(0x000000, 0)
+  container.appendChild(renderer.domElement)
+
+  // Create multiple wave lines
+  const numLines = 40
+  const points = 100
+  const lineSpacing = 0.15
+  
+  for (let i = 0; i < numLines; i++) {
+    const lineGeometry = new THREE.BufferGeometry()
+    const linePositions = new Float32Array(points * 3)
+    
+    for (let j = 0; j < points; j++) {
+      const x = (j - points/2) * 0.1
+      const y = (i - numLines/2) * lineSpacing
+      const z = 0
       
-      for (let j = 0; j <= waveSegments; j++) {
-        points.push(new THREE.Vector3(
-          (j - waveSegments/2) * (width/waveSegments),
-          Math.sin(j * 0.2 + i) * 0.3,
-          0
-        ))
-      }
-      
-      const waveGeometry = new THREE.BufferGeometry().setFromPoints(points)
-      const waveMaterial = new THREE.LineBasicMaterial({ 
-        color: colors[i % colors.length],
-        transparent: true,
-        opacity: 0.4
-      })
-      
-      const wave = new THREE.Line(waveGeometry, waveMaterial)
-      // Position waves to cover the full height of the screen
-      wave.position.y = (row - rows/2) * (waveSpacing/100)
-      wave.position.z = -5 + Math.random() * 2 // Randomize z position for depth
-      
-      wave.userData = {
-        originalY: wave.position.y,
-        speed: 0.2 + Math.random() * 0.4, // Slower base speed for more natural movement
-        amplitude: 0.3 + Math.random() * 0.4,
-        offset: Math.random() * Math.PI * 2,
-        horizontalOffset: Math.random() * Math.PI * 2, // Add horizontal movement
-      }
-      
-      waves.push(wave)
-      scene.add(wave)
+      linePositions[j * 3] = x
+      linePositions[j * 3 + 1] = y
+      linePositions[j * 3 + 2] = z
     }
+    
+    lineGeometry.setAttribute('position', new THREE.BufferAttribute(linePositions, 3))
+    
+    const lineMaterial = new THREE.LineBasicMaterial({ 
+      color: 0x2ed573,
+      transparent: true,
+      opacity: 0.5
+    })
+    
+    const line = new THREE.Line(lineGeometry, lineMaterial)
+    waves.push({
+      line,
+      positions: linePositions,
+      offset: i * 0.1
+    })
+    scene.add(line)
   }
 
-  camera.position.z = 10
+  camera.position.z = 5
 }
 
 function animate() {
   requestAnimationFrame(animate)
-
+  
   const time = Date.now() * 0.001
-
+  
   waves.forEach((wave, waveIndex) => {
-    const positions = wave.geometry.attributes.position.array
+    const positions = wave.positions
+    const points = positions.length / 3
     
-    // More complex wave animation
-    for (let i = 0; i < positions.length; i += 3) {
-      const x = positions[i]
-      const initialY = Math.sin((x * 0.3 + time * wave.userData.speed + wave.userData.offset) * 2)
-      const secondaryY = Math.sin((x * 0.1 - time * wave.userData.speed * 0.5 + wave.userData.offset) * 3)
+    for (let i = 0; i < points; i++) {
+      const x = positions[i * 3]
       
-      // Combine multiple sine waves for more interesting movement
-      positions[i + 1] = (initialY * 0.7 + secondaryY * 0.3) * wave.userData.amplitude
+      // Create the mountain-like peaks
+      const baseY = positions[i * 3 + 1]
+      const peakHeight = Math.sin(x * 0.5 + time + wave.offset) * 0.3
+      const noise = Math.sin(x * 2 + time * 2) * 0.05
+      
+      // Add more variation for the mountain effect
+      const mountainEffect = Math.exp(-Math.abs(x * 0.5)) * 0.8
+      const finalY = baseY + peakHeight * mountainEffect + noise
+      
+      positions[i * 3 + 1] = finalY
     }
     
-    // Add horizontal movement
-    wave.position.x = Math.sin(time * 0.2 + wave.userData.horizontalOffset) * 0.5
-    
-    // Vertical movement
-    wave.position.y = wave.userData.originalY + Math.sin(time * 0.3 + waveIndex) * 0.2
-    
-    wave.geometry.attributes.position.needsUpdate = true
+    wave.line.geometry.attributes.position.needsUpdate = true
   })
-
+  
   renderer.render(scene, camera)
 }
 
@@ -220,26 +215,6 @@ function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight
   camera.updateProjectionMatrix()
   renderer.setSize(window.innerWidth, window.innerHeight)
-  
-  // Update wave positions and sizes on resize
-  const waveSpacing = window.innerHeight / (waves.length / 4 - 1)
-  waves.forEach((wave, index) => {
-    const row = Math.floor(index / 4)
-    const width = window.innerWidth * 1.5
-    const positions = wave.geometry.attributes.position.array
-    
-    // Update wave width
-    for (let i = 0; i < positions.length; i += 3) {
-      const j = i / 3
-      positions[i] = (j - positions.length/6) * (width/positions.length*2)
-    }
-    
-    // Update wave position
-    wave.userData.originalY = (row - waves.length/8) * (waveSpacing/100)
-    wave.position.y = wave.userData.originalY
-    
-    wave.geometry.attributes.position.needsUpdate = true
-  })
 }
 </script>
 
