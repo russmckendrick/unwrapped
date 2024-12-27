@@ -1,31 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+    <meta name="robots" content="index, follow">
     <title>Vinyl Unwrapped - Russ McKendrick</title>
+    <meta name="keywords" content="vinyl,records,music,collection,statistics">
+    <meta name="description" content="A visual journey through my vinyl record collection, showcasing yearly statistics, genre distributions, and collection growth over time.">
+    <meta name="author" content="Russ McKendrick">
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon-512x512.png">
-    
-    <!-- Open Graph / Social Media -->
-    <meta property="og:title" content="Vinyl Unwrapped - Russ McKendrick">
-    <meta property="og:description" content="My vinyl listening habits unwrapped">
-    <meta property="og:image" content="https://unwrapped.russ.fm/og-image.png">
-    <meta property="og:type" content="website">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Vinyl Unwrapped - Russ McKendrick">
-    <meta name="twitter:description" content="My vinyl listening habits unwrapped">
-    <meta name="twitter:image" content="https://unwrapped.russ.fm/og-image.png">
-    
+    <!-- Preconnect to external resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1DB954">
+    
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#121212">
+    <meta name="msapplication-TileColor" content="#121212">
+    
+    <!-- Open Graph -->
+    <meta property="og:url" content="https://unwrapped.russ.fm/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vinyl Unwrapped">
+    <meta property="og:title" content="Vinyl Unwrapped - Record Collection Statistics">
+    <meta property="og:description" content="A visual journey through my vinyl record collection, showcasing yearly statistics, genre distributions, and collection growth over time.">
+    <meta property="og:image" content="https://unwrapped.russ.fm/og-image.png">
+    <meta property="og:locale" content="en">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://unwrapped.russ.fm/og-image.png">
+    <meta name="twitter:title" content="Vinyl Unwrapped - Record Collection Statistics">
+    <meta name="twitter:description" content="A visual journey through my vinyl record collection, showcasing yearly statistics, genre distributions, and collection growth over time.">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Vinyl Unwrapped",
+        "description": "A visual journey through my vinyl record collection, showcasing yearly statistics, genre distributions, and collection growth over time.",
+        "author": {
+          "@type": "Person",
+          "name": "Russ McKendrick"
+        },
+        "applicationCategory": "Visualization",
+        "operatingSystem": "Any",
+        "url": "https://unwrapped.russ.fm"
+      }
+    </script>
+    
+    <!-- Dark mode styles -->
+    <style>
+      :root {
+        color-scheme: dark;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --theme: #121212;
+          --primary: #1DB954;
+          --secondary: rgba(255, 255, 255, 0.7);
+          --content: rgba(255, 255, 255, 0.9);
+        }
+      }
+    </style>
   </head>
   <body class="bg-gray-900 text-white">
     <div id="app"></div>
