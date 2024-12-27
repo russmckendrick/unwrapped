@@ -132,7 +132,7 @@ function initThree() {
   if (!container) return
 
   scene = new THREE.Scene()
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+  camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000)
   
   renderer = new THREE.WebGLRenderer({ 
     antialias: true,
@@ -143,16 +143,16 @@ function initThree() {
   container.appendChild(renderer.domElement)
 
   // Create multiple wave lines
-  const numLines = 40
-  const points = 100
-  const lineSpacing = 0.15
+  const numLines = 60
+  const points = 150
+  const lineSpacing = 0.12
   
   for (let i = 0; i < numLines; i++) {
     const lineGeometry = new THREE.BufferGeometry()
     const linePositions = new Float32Array(points * 3)
     
     for (let j = 0; j < points; j++) {
-      const x = (j - points/2) * 0.1
+      const x = (j - points/2) * 0.15
       const y = (i - numLines/2) * lineSpacing
       const z = 0
       
@@ -178,7 +178,7 @@ function initThree() {
     scene.add(line)
   }
 
-  camera.position.z = 5
+  camera.position.z = 8
 }
 
 function animate() {
