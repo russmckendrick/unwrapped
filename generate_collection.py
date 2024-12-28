@@ -1,3 +1,28 @@
+#!/usr/bin/env python3
+"""
+Vinyl Collection Generator for Unwrapped
+
+This script generates a JSON file containing information about vinyl records added to a
+Discogs collection during a specified year. It interfaces with both the Discogs API
+and a custom russ.fm API to gather comprehensive record information including cover art
+and artist images.
+
+Environment Variables:
+    DISCOGS_TOKEN: Your Discogs API token (required)
+    DISCOGS_USERNAME: Your Discogs username (default: russmck)
+    ENABLE_DEBUG: Set to 'true' for debug logging (default: false)
+    DISCOGS_RATE_LIMIT_DELAY: Delay between API calls in seconds (default: 2)
+
+Usage:
+    python generate_collection.py --year YYYY
+
+Example:
+    python generate_collection.py --year 2024
+
+The script will create a JSON file named 'YYYY_collection.json' containing all vinyl
+records added to your collection in the specified year.
+"""
+
 import os
 import json
 import time
@@ -22,7 +47,15 @@ logging.basicConfig(level=log_level)
 logger = logging.getLogger(__name__)
 
 def get_discogs_client():
-    """Initialize and return Discogs client"""
+    """
+    Initialize and return a Discogs API client.
+    
+    Returns:
+        discogs_client.Client: Authenticated Discogs client instance
+        
+    Raises:
+        ValueError: If DISCOGS_TOKEN environment variable is not set
+    """
     token = os.getenv('DISCOGS_TOKEN')
     if not token:
         raise ValueError("Please set DISCOGS_TOKEN in your .env file")
@@ -33,7 +66,19 @@ def get_discogs_client():
     )
 
 def get_format_info(format_obj):
-    """Safely extract format information"""
+    """
+    Safely extract format information from a Discogs format object.
+    
+    Args:
+        format_obj (Union[dict, object]): Format information from Discogs API
+        
+    Returns:
+        dict: Normalized format information containing:
+            - name: Format name (e.g., 'Vinyl')
+            - qty: Quantity of items in this format
+            - text: Additional format text (e.g., 'Crystal Clear')
+            - descriptions: List of format descriptions (e.g., ['LP', 'Album'])
+    """
     if isinstance(format_obj, dict):
         return {
             'name': format_obj.get('name', 'Unknown Format'),
@@ -49,13 +94,26 @@ def get_format_info(format_obj):
     }
 
 def get_label_info(label):
-    """Safely extract label information"""
+    """
+    Extract relevant information from a Discogs label object.
+    
+    Args:
+        label (Union[dict, object]): Label information from Discogs API
+        
+    Returns:
+        str: Label name
+    """
     if isinstance(label, dict):
         return label.get('name', 'Unknown Label')
     return getattr(label, 'name', 'Unknown Label')
 
 def fetch_russ_fm_data():
-    """Fetch image data from russ.fm"""
+    """
+    Fetch image data from russ.fm API.
+    
+    Returns:
+        list: List of image data from russ.fm API
+    """
     try:
         response = requests.get('https://www.russ.fm/index.json')
         response.raise_for_status()
@@ -65,7 +123,19 @@ def fetch_russ_fm_data():
         return []
 
 def create_image_lookup(russ_fm_data):
-    """Create lookup tables for cover and artist images"""
+    """
+    Create lookup tables for cover and artist images.
+    
+    Args:
+        russ_fm_data (list): List of image data from russ.fm API
+        
+    Returns:
+        tuple: Tuple containing:
+            - cover_images: Dictionary mapping Discogs IDs to cover image URLs
+            - artist_images: Dictionary mapping Discogs IDs to artist image URLs
+            - album_uris: Dictionary mapping Discogs IDs to album URIs
+            - artist_uris: Dictionary mapping Discogs IDs to artist URIs
+    """
     cover_images = {}
     artist_images = {}
     album_uris = {}
@@ -82,7 +152,15 @@ def create_image_lookup(russ_fm_data):
     return cover_images, artist_images, album_uris, artist_uris
 
 def fetch_collection(year):
-    """Fetch collection items added in specified year"""
+    """
+    Fetch collection items added in specified year.
+    
+    Args:
+        year (int): Year to fetch collection data for
+        
+    Returns:
+        list: List of collection items added in the specified year
+    """
     d = get_discogs_client()
     user = d.user(USERNAME)
     collection = user.collection_folders[0].releases
@@ -152,27 +230,53 @@ def fetch_collection(year):
     return items
 
 def save_collection(items, output_file):
-    """Save collection to JSON file"""
+    """
+    Save collection to JSON file.
+    
+    Args:
+        items (list): List of collection items to save
+        output_file (str): Path to output JSON file
+    """
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(items, f, indent=2, ensure_ascii=False)
     logger.info(f"Saved {len(items)} items to {output_file}")
 
 def main():
-    """Main function to fetch and save collection data"""
-    parser = argparse.ArgumentParser(description='Generate Discogs collection JSON for a specific year')
+    """
+    Main function to fetch and save collection data.
+    
+    This function:
+    1. Parses command line arguments
+    2. Fetches collection data for the specified year
+    3. Saves the data to a JSON file named 'YYYY_collection.json'
+    
+    Command Line Arguments:
+        --year: Year to generate collection data for (default: current year)
+    
+    Returns:
+        None
+    
+    Raises:
+        ValueError: If DISCOGS_TOKEN is not set
+        requests.exceptions.RequestException: If API requests fail
+        IOError: If there are issues writing the output file
+    """
+    parser = argparse.ArgumentParser(
+        description='Generate Discogs collection JSON for a specific year',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__
+    )
     parser.add_argument('--year', type=int, default=datetime.now().year,
                       help='Year to generate collection data for (default: current year)')
+    
     args = parser.parse_args()
     
-    output_file = f"public/collection_{args.year}.json"
+    logger.info(f"Fetching {args.year} collection for user: {USERNAME}")
     
-    # Ensure public directory exists
-    os.makedirs('public', exist_ok=True)
-    
-    print(f"Fetching {args.year} collection for user: {USERNAME}")
+    # Fetch and save collection data
+    output_file = f"{args.year}_collection.json"
     items = fetch_collection(args.year)
     save_collection(items, output_file)
-    print(f"Successfully saved {len(items)} items to {output_file}")
     
     return items
 
