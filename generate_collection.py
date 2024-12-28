@@ -103,28 +103,29 @@ def fetch_collection(year):
                 
             for item in releases:
                 try:
-                    # Get the date added - it's already a datetime object
-                    date_added = item.date_added
+                    # Get the date added from the data property
+                    date_added = datetime.strptime(item.data['date_added'], "%Y-%m-%dT%H:%M:%S%z")
                     
                     # Check if it was added in the specified year
                     if date_added.year == year:
-                        logger.debug(f"Processing release: {item.release.title}")
-                        logger.debug(f"Format data: {item.release.formats}")
+                        basic_info = item.data['basic_information']
+                        logger.debug(f"Processing release: {basic_info['title']}")
+                        logger.debug(f"Format data: {basic_info['formats']}")
                         
                         release_data = {
-                            'id': item.id,
-                            'title': item.release.title,
-                            'artist': [artist.name for artist in item.release.artists],
-                            'date_added': item.date_added.isoformat(),
-                            'year': item.release.year,
-                            'formats': [get_format_info(format_obj) for format_obj in item.release.formats],
-                            'labels': [get_label_info(label) for label in item.release.labels],
-                            'genres': item.release.genres,
-                            'styles': item.release.styles if hasattr(item.release, 'styles') else [],
-                            'cover_image': cover_images.get(str(item.release.id)),
-                            'artist_image': artist_images.get(str(item.release.id)),
-                            'album_uri': album_uris.get(str(item.release.id)),
-                            'artist_uri': artist_uris.get(str(item.release.id))
+                            'id': item.data['id'],
+                            'title': basic_info['title'],
+                            'artist': [artist['name'] for artist in basic_info['artists']],
+                            'date_added': item.data['date_added'],
+                            'year': basic_info['year'],
+                            'formats': [get_format_info(format_obj) for format_obj in basic_info['formats']],
+                            'labels': [get_label_info(label) for label in basic_info['labels']],
+                            'genres': basic_info['genres'],
+                            'styles': basic_info.get('styles', []),
+                            'cover_image': cover_images.get(str(basic_info['id'])),
+                            'artist_image': artist_images.get(str(basic_info['id'])),
+                            'album_uri': album_uris.get(str(basic_info['id'])),
+                            'artist_uri': artist_uris.get(str(basic_info['id']))
                         }
                         items.append(release_data)
                 except Exception as e:

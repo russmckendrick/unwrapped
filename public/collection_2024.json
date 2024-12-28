@@ -1679,7 +1679,7 @@
       {
         "name": "Vinyl",
         "qty": "1",
-        "text": "",
+        "text": "Gatefold",
         "descriptions": [
           "LP",
           "Album"
@@ -2583,7 +2583,7 @@
       {
         "name": "Vinyl",
         "qty": "1",
-        "text": "Green (Caramel Apple)",
+        "text": "Green [Caramel Apple]",
         "descriptions": [
           "LP",
           "Album",
@@ -4506,7 +4506,8 @@
         "text": "",
         "descriptions": [
           "LP",
-          "Deluxe Edition"
+          "Deluxe Edition",
+          "Limited Edition"
         ]
       }
     ],
@@ -6675,6 +6676,40 @@
     "artist_uri": "https://www.russ.fm/artist/gruff-rhys/"
   },
   {
+    "id": 31910491,
+    "title": "The New Sound",
+    "artist": [
+      "Geordie Greep"
+    ],
+    "date_added": "2024-12-28T04:04:07-08:00",
+    "year": 2024,
+    "formats": [
+      {
+        "name": "Vinyl",
+        "qty": "2",
+        "text": "Regular Cover",
+        "descriptions": [
+          "LP",
+          "Album"
+        ]
+      }
+    ],
+    "labels": [
+      "Rough Trade"
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "styles": [
+      "Art Rock",
+      "Avantgarde"
+    ],
+    "cover_image": "https://www.russ.fm/albums/the-new-sound-31910491/the-new-sound-31910491.jpg",
+    "artist_image": "https://www.russ.fm/artist/geordie-greep/geordie-greep.jpg",
+    "album_uri": "https://www.russ.fm/albums/the-new-sound-31910491/",
+    "artist_uri": "https://www.russ.fm/artist/geordie-greep/"
+  },
+  {
     "id": 32439303,
     "title": "The Wolf Changes Its Fur But Not Its Nature + Horrific Honorifics Number Two",
     "artist": [
@@ -7335,42 +7370,6 @@
     "artist_uri": "https://www.russ.fm/artist/steven-wilson/"
   },
   {
-    "id": 32376702,
-    "title": "Sparkle In The Rain",
-    "artist": [
-      "Simple Minds"
-    ],
-    "date_added": "2024-11-23T07:59:01-08:00",
-    "year": 2024,
-    "formats": [
-      {
-        "name": "Vinyl",
-        "qty": "1",
-        "text": "Dark Blue Transparent",
-        "descriptions": [
-          "LP",
-          "Album",
-          "Limited Edition",
-          "Repress",
-          "Special Edition"
-        ]
-      }
-    ],
-    "labels": [
-      "Virgin Records Ltd."
-    ],
-    "genres": [
-      "Rock"
-    ],
-    "styles": [
-      "New Wave"
-    ],
-    "cover_image": "https://www.russ.fm/albums/sparkle-in-the-rain-32376702/sparkle-in-the-rain-32376702.jpg",
-    "artist_image": "https://www.russ.fm/artist/simple-minds/simple-minds.jpg",
-    "album_uri": "https://www.russ.fm/albums/sparkle-in-the-rain-32376702/",
-    "artist_uri": "https://www.russ.fm/artist/simple-minds/"
-  },
-  {
     "id": 32253204,
     "title": "Change Giver",
     "artist": [
@@ -7556,6 +7555,41 @@
     "artist_image": "https://www.russ.fm/artist/steven-wilson/steven-wilson.jpg",
     "album_uri": "https://www.russ.fm/albums/harmonic-divergence-the-harmony-codex-remixed-and-reimagined-30450185/",
     "artist_uri": "https://www.russ.fm/artist/steven-wilson/"
+  },
+  {
+    "id": 32376702,
+    "title": "Sparkle In The Rain",
+    "artist": [
+      "Simple Minds"
+    ],
+    "date_added": "2024-11-23T07:59:01-08:00",
+    "year": 2024,
+    "formats": [
+      {
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Translucent Blue",
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition",
+          "Repress"
+        ]
+      }
+    ],
+    "labels": [
+      "Virgin Records Ltd."
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "styles": [
+      "New Wave"
+    ],
+    "cover_image": "https://www.russ.fm/albums/sparkle-in-the-rain-32376702/sparkle-in-the-rain-32376702.jpg",
+    "artist_image": "https://www.russ.fm/artist/simple-minds/simple-minds.jpg",
+    "album_uri": "https://www.russ.fm/albums/sparkle-in-the-rain-32376702/",
+    "artist_uri": "https://www.russ.fm/artist/simple-minds/"
   },
   {
     "id": 31416686,
