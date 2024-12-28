@@ -248,7 +248,7 @@ def main():
     This function:
     1. Parses command line arguments
     2. Fetches collection data for the specified year
-    3. Saves the data to a JSON file named 'YYYY_collection.json'
+    3. Saves the data to a JSON file named 'collection_YYYY.json'
     
     Command Line Arguments:
         --year: Year to generate collection data for (default: current year)
