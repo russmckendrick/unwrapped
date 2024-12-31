@@ -108,11 +108,11 @@ onMounted(async () => {
   }
 })
 
-// Format date to MM/DD
+// Format date to DD/MM
 const formatDate = (dateStr) => {
   if (!dateStr) return ''
   const date = new Date(dateStr)
-  return `${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')}`
+  return `${date.getDate().toString().padStart(2, '0')}/${(date.getMonth() + 1).toString().padStart(2, '0')}`
 }
 
 let scene, camera, renderer, waves = []
