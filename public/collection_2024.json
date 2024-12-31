@@ -443,9 +443,9 @@
       "Indie Rock",
       "Indie Pop"
     ],
-    "cover_image": "https://www.russ.fm/albums/set-yourself-on-fire-31874636/set-yourself-on-fire-31874636.jpg",
+    "cover_image": "https://www.russ.fm/albums/set-yourself-on-fire-20th-anniversary-edition-31874636/set-yourself-on-fire-20th-anniversary-edition-31874636.jpg",
     "artist_image": "https://www.russ.fm/artist/stars/stars.jpg",
-    "album_uri": "https://www.russ.fm/albums/set-yourself-on-fire-31874636/",
+    "album_uri": "https://www.russ.fm/albums/set-yourself-on-fire-20th-anniversary-edition-31874636/",
     "artist_uri": "https://www.russ.fm/artist/stars/"
   },
   {
@@ -1474,6 +1474,45 @@
     "artist_uri": "https://www.russ.fm/artist/no-man/"
   },
   {
+    "id": 29013751,
+    "title": "Fuse",
+    "artist": [
+      "Everything But The Girl"
+    ],
+    "date_added": "2024-12-30T01:10:25-08:00",
+    "year": 2023,
+    "formats": [
+      {
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Transparent Pink With Purple Splatter",
+        "descriptions": [
+          "LP",
+          "Album",
+          "Limited Edition",
+          "Reissue"
+        ]
+      }
+    ],
+    "labels": [
+      "Buzzin' Fly Records",
+      "Virgin Music Group",
+      "Verve Records"
+    ],
+    "genres": [
+      "Electronic",
+      "Pop"
+    ],
+    "styles": [
+      "House",
+      "Indie Pop"
+    ],
+    "cover_image": "https://www.russ.fm/albums/fuse-29013751/fuse-29013751.jpg",
+    "artist_image": "https://www.russ.fm/artist/everything-but-the-girl/everything-but-the-girl.jpg",
+    "album_uri": "https://www.russ.fm/albums/fuse-29013751/",
+    "artist_uri": "https://www.russ.fm/artist/everything-but-the-girl/"
+  },
+  {
     "id": 9141285,
     "title": "Trespass",
     "artist": [
@@ -2287,6 +2326,41 @@
     "artist_uri": "https://www.russ.fm/artist/tears-for-fears/"
   },
   {
+    "id": 31850216,
+    "title": "No Title As Of 13 February 2024 28,340 Dead",
+    "artist": [
+      "Godspeed You Black Emperor!"
+    ],
+    "date_added": "2024-12-31T01:19:01-08:00",
+    "year": 2024,
+    "formats": [
+      {
+        "name": "Vinyl",
+        "qty": "2",
+        "text": "180g",
+        "descriptions": [
+          "LP",
+          "Album",
+          "Stereo"
+        ]
+      }
+    ],
+    "labels": [
+      "Constellation"
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "styles": [
+      "Post Rock",
+      "Drone"
+    ],
+    "cover_image": "https://www.russ.fm/albums/notitle-as-of-13-february-2024-28-340-dead-31850216/notitle-as-of-13-february-2024-28-340-dead-31850216.jpg",
+    "artist_image": "https://www.russ.fm/artist/godspeed-you-black-emperor/godspeed-you-black-emperor.jpg",
+    "album_uri": "https://www.russ.fm/albums/notitle-as-of-13-february-2024-28-340-dead-31850216/",
+    "artist_uri": "https://www.russ.fm/artist/godspeed-you-black-emperor/"
+  },
+  {
     "id": 30971581,
     "title": "Bow To Love",
     "artist": [
@@ -2696,9 +2770,9 @@
     ],
     "styles": [],
     "cover_image": "https://www.russ.fm/albums/tim-s-listening-party-30149570/tim-s-listening-party-30149570.jpg",
-    "artist_image": "https://www.russ.fm/artist/various/various.jpg",
+    "artist_image": "https://www.russ.fm/artist/tim-burgess/tim-burgess.jpg",
     "album_uri": "https://www.russ.fm/albums/tim-s-listening-party-30149570/",
-    "artist_uri": "https://www.russ.fm/artist/various/"
+    "artist_uri": "https://www.russ.fm/artist/tim-burgess/"
   },
   {
     "id": 31394765,
@@ -3111,7 +3185,7 @@
       }
     ],
     "labels": [
-      "EMF Records"
+      "EMF Records (9)"
     ],
     "genres": [
       "Electronic",
@@ -4178,9 +4252,9 @@
     "styles": [
       "Techno"
     ],
-    "cover_image": "https://www.russ.fm/albums/chime-remastered-29941150/chime-remastered-29941150.jpg",
+    "cover_image": "https://www.russ.fm/albums/chime-deeper-29941150/chime-deeper-29941150.jpg",
     "artist_image": "https://www.russ.fm/artist/orbital/orbital.jpg",
-    "album_uri": "https://www.russ.fm/albums/chime-remastered-29941150/",
+    "album_uri": "https://www.russ.fm/albums/chime-deeper-29941150/",
     "artist_uri": "https://www.russ.fm/artist/orbital/"
   },
   {
@@ -5140,10 +5214,10 @@
     "styles": [
       "Prog Rock"
     ],
-    "cover_image": null,
-    "artist_image": null,
-    "album_uri": null,
-    "artist_uri": null
+    "cover_image": "https://www.russ.fm/albums/flying-colors-3641463/flying-colors-3641463.jpg",
+    "artist_image": "https://www.russ.fm/artist/flying-colors/flying-colors.jpg",
+    "album_uri": "https://www.russ.fm/albums/flying-colors-3641463/",
+    "artist_uri": "https://www.russ.fm/artist/flying-colors/"
   },
   {
     "id": 31896559,
@@ -6347,6 +6421,58 @@
     "artist_uri": "https://www.russ.fm/artist/the-beat/"
   },
   {
+    "id": 30462800,
+    "title": "Wha'ppen? (Expanded Edition)",
+    "artist": [
+      "The Beat (2)"
+    ],
+    "date_added": "2024-12-30T01:10:06-08:00",
+    "year": 2024,
+    "formats": [
+      {
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Yellow",
+        "descriptions": [
+          "LP",
+          "Album",
+          "Reissue"
+        ]
+      },
+      {
+        "name": "Vinyl",
+        "qty": "1",
+        "text": "Green",
+        "descriptions": [
+          "LP",
+          "Compilation"
+        ]
+      },
+      {
+        "name": "All Media",
+        "qty": "1",
+        "text": "",
+        "descriptions": [
+          "Record Store Day",
+          "Limited Edition"
+        ]
+      }
+    ],
+    "labels": [
+      "Rhino Records (2)"
+    ],
+    "genres": [
+      "Rock"
+    ],
+    "styles": [
+      "Ska"
+    ],
+    "cover_image": "https://www.russ.fm/albums/wha-ppen-expanded-edition-30462800/wha-ppen-expanded-edition-30462800.jpg",
+    "artist_image": "https://www.russ.fm/artist/the-beat/the-beat.jpg",
+    "album_uri": "https://www.russ.fm/albums/wha-ppen-expanded-edition-30462800/",
+    "artist_uri": "https://www.russ.fm/artist/the-beat/"
+  },
+  {
     "id": 12753628,
     "title": "...Calling All Stations...",
     "artist": [
@@ -6880,10 +7006,10 @@
       "Alternative Rock",
       "Indie Rock"
     ],
-    "cover_image": null,
-    "artist_image": null,
-    "album_uri": null,
-    "artist_uri": null
+    "cover_image": "https://www.russ.fm/albums/spirale-pearlies-rearranged-32067312/spirale-pearlies-rearranged-32067312.jpg",
+    "artist_image": "https://www.russ.fm/artist/emma-anderson/emma-anderson.jpg",
+    "album_uri": "https://www.russ.fm/albums/spirale-pearlies-rearranged-32067312/",
+    "artist_uri": "https://www.russ.fm/artist/emma-anderson/"
   },
   {
     "id": 32038208,
