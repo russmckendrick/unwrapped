@@ -229,14 +229,20 @@ def fetch_collection(year):
     logger.info(f"Found {len(items)} items from {year}")
     return items
 
-def save_collection(items, output_file):
+def save_collection(items, year):
     """
-    Save collection to JSON file.
+    Save collection to JSON file in the public folder.
     
     Args:
         items (list): List of collection items to save
-        output_file (str): Path to output JSON file
+        year (int): Year of the collection data
     """
+    # Create public directory if it doesn't exist
+    os.makedirs('public', exist_ok=True)
+    
+    # Use the correct filename format
+    output_file = f"public/collection_{year}.json"
+    
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(items, f, indent=2, ensure_ascii=False)
     logger.info(f"Saved {len(items)} items to {output_file}")
@@ -248,7 +254,7 @@ def main():
     This function:
     1. Parses command line arguments
     2. Fetches collection data for the specified year
-    3. Saves the data to a JSON file named 'collection_YYYY.json'
+    3. Saves the data to a JSON file named 'collection_YYYY.json' in the public folder
     
     Command Line Arguments:
         --year: Year to generate collection data for (default: current year)
@@ -274,9 +280,8 @@ def main():
     logger.info(f"Fetching {args.year} collection for user: {USERNAME}")
     
     # Fetch and save collection data
-    output_file = f"{args.year}_collection.json"
     items = fetch_collection(args.year)
-    save_collection(items, output_file)
+    save_collection(items, args.year)
     
     return items
 
